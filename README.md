@@ -4,3 +4,4 @@ Day 1:
 - CSS styling
 - Optimizing Fonts and Images
 - Creating Layouts and Pages
+
