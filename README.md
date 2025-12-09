@@ -12,6 +12,16 @@ Day 1:
       không gọi Page() thủ công
       không import Page vào Layout
       (đặt layout và page cùng cấp trong folder)
+  - |                                  | Server Component (mặc định) | Client Component (`'use client'`) |
+| -------------------------------- | --------------------------- | --------------------------------- |
+| chạy ở đâu                       | server                      | browser                           |
+| có access DOM                    | ❌                           | ✅                                 |
+| dùng hooks (useState, useEffect) | ❌                           | ✅                                 |
+| dùng event onClick               | ❌                           | ✅                                 |
+| SEO tốt                          | ✅                           | ❌                                 |
+| bundle JS                        | ít                          | nhiều                             |
+
+
 
 
 
