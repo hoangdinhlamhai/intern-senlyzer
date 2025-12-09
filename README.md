@@ -6,5 +6,12 @@ Day 1:
   - CSS styling
   - Optimizing Fonts and Images
   - Creating Layouts and Pages
+    + Next.js tự động:
+      render layout.tsx
+      nhét page.tsx vào {children}
+      không gọi Page() thủ công
+      không import Page vào Layout
+      (đặt layout và page cùng cấp trong folder)
+
 
 
