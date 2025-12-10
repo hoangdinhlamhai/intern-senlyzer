@@ -27,6 +27,33 @@ Day 1:
     +  ko SEO tốt
     +  bundle JS nhiều
 
+Day 2:
+  - Setup db trên vercel (dùng prisma v5)
+    + Deploy backend
+    + Tạo db trên vercel
+    + vercel link
+    + vercel env pull .env.development.local
+    + kiểm tra url trong .env (DATABASE_URL="postgres://postgres_xxx...")
+    + Generated Prisma Client: npx prisma generate
+    + Apply migrations vào Database Vercel: npx prisma migrate deploy
+    + Seed database: npx prisma db seed
+    + local dev:
+        -> npx prisma migrate dev,
+        -> npx prisma db seed
+    + sau khi deploy
+        -> vercel link,
+        -> vercel env pull .env.local,
+        -> npx prisma migrate deploy,
+        -> npx prisma db seed,
+    + mỗi lần sửa schema:
+        -> local: npx prisma migrate dev,
+        -> deployment: vercel deploy,
+                       npx prisma migrate deploy
+
+
+
+
+
 
 
 
