@@ -8,20 +8,29 @@ export default async function Page() {
     const users = await fetchUsers();
   return (
     <>
-        {/* <p>{pathname}</p> */}
         <p>Dashboard Page</p>
-        {/* <Link href="/dashboard/customers">
-          Customer
-        </Link>
-        <Link href="/dashboard/invoices">
-          Invoices
-        </Link> */}
 
-        {users.map((user: User) => (
-        <div key={user.id}>
-          {user.name} – {user.email}
-        </div>
-      ))}
+        <p>Kết nối db trực tuyến trên vercel bằng Prisma</p>
+
+        <table className="user-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {users.map((user: User) => (
+            <tr key={user.id}>
+              <td>{user.id}</td>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 }
