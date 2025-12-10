@@ -38,17 +38,18 @@ Day 2:
     + Apply migrations vào Database Vercel: npx prisma migrate deploy
     + Seed database: npx prisma db seed
     + local dev:
-        npx prisma migrate dev
-        npx prisma db seed
+        -> npx prisma migrate dev,
+        -> npx prisma db seed
     + sau khi deploy
-        vercel link
-        vercel env pull .env.local
-        npx prisma migrate deploy
-        npx prisma db seed
+        -> vercel link,
+        -> vercel env pull .env.local,
+        -> npx prisma migrate deploy,
+        -> npx prisma db seed,
     + mỗi lần sửa schema:
-        local: npx prisma migrate dev
-        deployment: vercel deploy
-                    npx prisma migrate deploy
+        -> local: npx prisma migrate dev,
+        -> deployment: vercel deploy,
+                       npx prisma migrate deploy
+
 
 
 
