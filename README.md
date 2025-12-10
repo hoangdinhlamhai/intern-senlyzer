@@ -49,6 +49,9 @@ Day 2:
         -> local: npx prisma migrate dev,
         -> deployment: vercel deploy,
                        npx prisma migrate deploy
+  - Fetch data: Next + Prisma
+    + Prisma: Prisma = ORM (Object Relational Mapper) giúp truy vấn db không cần viết sql thủ công (như JPA bên Spring)
+
 
 
 
