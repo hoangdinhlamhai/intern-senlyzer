@@ -1,0 +1,32 @@
+.sidebar {
+  width: 200px;
+  background: #f5f5f5;
+  padding: 16px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-right: 1px solid #ddd;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.sidebar ul {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #333;
+  font-size: 15px;
+}
+
+.sidebar a:hover {
+  color: #0070f3;
+}
