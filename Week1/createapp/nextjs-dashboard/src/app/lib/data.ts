@@ -1,28 +1,35 @@
-// import prisma from "@/app/lib/prisma";
-// import type { User } from "@prisma/client";
-
-// export async function fetchUsers(): Promise<User[]> {
-//   try {
-//     const data = await prisma.user.findMany({
-//       orderBy: { createdAt: "desc" },
-//     });
-//     return data;
-//   } catch (error) {
-//     console.error("fetchUsers Error:", error);
-//     throw new Error("Failed to fetch users");
-//   }
-// }
-
-// app/lib/data.ts
 import prisma from "@/app/lib/prisma";
+import { Prisma } from '@prisma/client';
 
-export async function fetchUsers() {
+export async function fetchUsersPaginated(page = 1, limit = 5, query = "") {
   try {
-    return await prisma.user.findMany({
+    const where: Prisma.UserWhereInput = query
+      ? {
+          OR: [
+            { name: { contains: query, mode: "insensitive" } },
+            { email: { contains: query, mode: "insensitive" } },
+          ],
+        }
+      : {};
+
+    const total = await prisma.user.count({ where });
+
+    const users = await prisma.user.findMany({
+      where,
+      skip: (page - 1) * limit,
+      take: limit,
       orderBy: { createdAt: "desc" },
     });
+
+    return {
+      users,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    };
   } catch (error) {
-    console.error("fetchUsers Error:", error);
-    throw new Error("Failed to fetch users");
+    console.error("fetchUsersPaginated Error:", error);
+    throw new Error("Failed to fetch users (paginated)");
   }
 }
