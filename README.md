@@ -63,6 +63,8 @@ viết các hàm bất đồng bộ có thể được gọi từ các thành ph
  - Handling Errors
    + Sử dụng error.tsx tập tin đặc biệt để bắt lỗi
  - Improving Accessibility
+   
+
 Day 4:
  - Adding Authentication
     + Thiết lập Cấu hình (auth.config.ts): Tạo file cấu hình chứa các quy tắc điều hướng (như trang đăng nhập tùy chỉnh) 
@@ -83,6 +85,7 @@ Hàm này xử lý các lỗi đăng nhập và trả về phản hồi thích h
  - What are HTTP Status Codes?, What is a robots.txt File?
     + Một tệp robots.txtTệp này cho trình thu thập thông tin của công cụ tìm kiếm biết những trang hoặc tệp nào mà trình thu thập thông tin có thể
 hoặc không thể yêu cầu từ trang web của bạn
+
 
 
 
