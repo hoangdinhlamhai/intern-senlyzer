@@ -30,6 +30,7 @@ export default async function Page(
             <th>ID</th>
             <th>Tên</th>
             <th>Email</th>
+            <th>Password</th>
           </tr>
         </thead>
 
@@ -39,6 +40,7 @@ export default async function Page(
               <td>{user.id}</td>
               <td>{user.name}</td>
               <td>{user.email}</td>
+              <td>{user.password}</td>
             </tr>
           ))}
         </tbody>
