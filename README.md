@@ -63,6 +63,27 @@ viết các hàm bất đồng bộ có thể được gọi từ các thành ph
  - Handling Errors
    + Sử dụng error.tsx tập tin đặc biệt để bắt lỗi
  - Improving Accessibility
+Day 4:
+ - Adding Authentication
+    + Thiết lập Cấu hình (auth.config.ts): Tạo file cấu hình chứa các quy tắc điều hướng (như trang đăng nhập tùy chỉnh) 
+và logic phân quyền truy cập (authorized)
+    + Bảo vệ Route bằng Proxy (proxy.ts): Sử dụng cấu hình ở bước 1 để tạo Middleware (Proxy). 
+Để chặn các truy cập trái phép trước khi nội dung trang được render
+    + Xây dựng Logic Xác thực (auth.ts): Đây là nơi khởi tạo chính của NextAuth. Tại đây, thêm Credentials provider để login bằng email/password, 
+zod để validate dữ liệu đầu vào, dùng bcrypt để so sánh mật khẩu đã mã hóa trong db
+    + Tạo Server Action (actions.ts): Tạo một hành động phía server (authenticate) để gọi hàm signIn từ auth.ts. 
+Hàm này xử lý các lỗi đăng nhập và trả về phản hồi thích hợp
+    + Form đăng nhập (login-form.tsx): Kết nối form React với Server Action bằng hook useActionState
+ - Adding Metadata
+ - Why is SEO so important?
+    + Tăng thứ hạng tìm kiếm trên các công cụ tìm kiếm
+ - Search Systems
+ - What are Web Crawlers?
+ - Crawling and Indexing
+ - What are HTTP Status Codes?, What is a robots.txt File?
+    + Một tệp robots.txtTệp này cho trình thu thập thông tin của công cụ tìm kiếm biết những trang hoặc tệp nào mà trình thu thập thông tin có thể
+hoặc không thể yêu cầu từ trang web của bạn
+
 
 
 
