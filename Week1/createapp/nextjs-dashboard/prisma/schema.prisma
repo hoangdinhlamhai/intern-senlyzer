@@ -17,7 +17,7 @@ generator client {
 
 // Example data model
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   email     String   @unique
   password  String   @default("")
