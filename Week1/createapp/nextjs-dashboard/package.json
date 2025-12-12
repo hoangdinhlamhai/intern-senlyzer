@@ -10,10 +10,12 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@paralleldrive/cuid2": "^3.0.4",
     "@prisma/client": "^5.22.0",
     "@prisma/config": "^7.1.0",
     "@tailwindcss/vite": "^4.1.17",
     "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
     "dotenv": "^17.2.3",
     "next": "16.0.8",
