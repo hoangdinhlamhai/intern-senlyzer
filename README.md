@@ -98,7 +98,8 @@ Day 5:
  - SEO Impact
  - Improving your Core Web Vitals
  - 🛠 So sánh 2 cách kết nối và truy vấn db
-     Cách 1: Dùng ORM Prisma (v5)
+
+   Cách 1: Dùng ORM Prisma (v5)
      + deploy code lên vercel
      + Vercel link: link với db
      + npx prisma pull env.development.local
@@ -109,13 +110,15 @@ Day 5:
      + sử dụng file prisma/schema.prisma để tạo các bảng
      + npx prisma db seed: fill data từ file prisma/seed.ts
      + truy vấn bằng các hàm định nghĩa sẵn
-     Cách 2: thủ công+
+
+   Cách 2: thủ công+
      + deploy code lên vercel
      + Vercel link: link với db
      + kiểm tra url trong .env (DATABASE_URL="postgres://postgres_xxxx...")
      + tạo data sẵn cho từng bảng ở file placeholder-data.ts
      + file: seed/route.ts: import từ file placeholder-data.ts, viết hàm thực thi bằng lệnh sql: run bằng cách chạy localhost:3000/seed
      + tương tự: viết hàm truy vấn khác ở 1 file (data.ts), sang file khác import vào để dùng
+
 
 
 
