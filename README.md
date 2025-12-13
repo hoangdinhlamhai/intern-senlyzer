@@ -86,6 +86,37 @@ Hàm này xử lý các lỗi đăng nhập và trả về phản hồi thích h
     + Một tệp robots.txtTệp này cho trình thu thập thông tin của công cụ tìm kiếm biết những trang hoặc tệp nào mà trình thu thập thông tin có thể
 hoặc không thể yêu cầu từ trang web của bạn
 
+Day 5:
+ - What about AMP?: một công nghệ cho phép các nhà phát triển tạo ra các trang web tải nhanh hơn trên thiết bị di động -> đã loại bỏ sau NextJS 16
+ - URL Structure Metadata <meta name="description" content="Check out Iphone 12 XR Pro and Iphone 12 Pro Max. Visit your local store and for expert advice.">📈
+ - On Page SEO
+ - Web Performance & Core Web Vitals
+ - Web Vitals Overview: là một sáng kiến của Google nhằm cung cấp hướng dẫn thống nhất về các tín hiệu chất lượng thiết yếu để mang lại trải nghiệm người dùng tuyệt vời trên web.
+ - Largest Contentful Paint (LCP)
+ - First Input Delay (FID)
+ - Cumulative Layout Shift (CLS)
+ - SEO Impact
+ - Improving your Core Web Vitals
+ - 🛠 So sánh 2 cách kết nối và truy vấn db
+     Cách 1: Dùng ORM Prisma (v5)
+     + deploy code lên vercel
+     + Vercel link: link với db
+     + npx prisma pull env.development.local
+     + kiểm tra url trong .env (DATABASE_URL="postgres://postgres_xxxx...")
+     + Generated Prisma Client: npx prisma generate
+     + Apply migrations vào Database Vercel: npx prisma migrate deploy
+     + npx prisma migrate dev --name init
+     + sử dụng file prisma/schema.prisma để tạo các bảng
+     + npx prisma db seed: fill data từ file prisma/seed.ts
+     + truy vấn bằng các hàm định nghĩa sẵn
+     Cách 2: thủ công+
+     + deploy code lên vercel
+     + Vercel link: link với db
+     + kiểm tra url trong .env (DATABASE_URL="postgres://postgres_xxxx...")
+     + tạo data sẵn cho từng bảng ở file placeholder-data.ts
+     + file: seed/route.ts: import từ file placeholder-data.ts, viết hàm thực thi bằng lệnh sql: run bằng cách chạy localhost:3000/seed
+     + tương tự: viết hàm truy vấn khác ở 1 file (data.ts), sang file khác import vào để dùng
+
 
 
 
