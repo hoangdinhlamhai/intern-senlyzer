@@ -119,6 +119,28 @@ Day 5:
      + file: seed/route.ts: import từ file placeholder-data.ts, viết hàm thực thi bằng lệnh sql: run bằng cách chạy localhost:3000/seed
      + tương tự: viết hàm truy vấn khác ở 1 file (data.ts), sang file khác import vào để dùng
 
+Day 6: Ôn tập:
+ - Ôn lại Search: 
+     Gõ vào ô search -> url thay đổi -> page.tsx tự động re-render
+     page lấy được tham số query mới -> Suspense key thay đổi -> table bị remount -> fetch lại Data
+ - Pagination:
+     Ở Page nhận vào prop thì NextJS tự lấy prop từ url truyền vào, lúc search thì page = 1, khi nhấn chuyển page ở pagination thì tham số page
+mới được đổi"
+ - Ôn lại create:
+     Sử dụng thuộc tính action={createInvoice} trong thẻ <form>. Trong React, thuộc tính action này đặc biệt cho phép gọi trực tiếp Server Action 
+thay vì một URL string. -> Khi người dùng nhấn Submit, trình duyệt sẽ tự động gửi FormData đến hàm createInvoice.
+     Trích xuất dữ liệu: Lấy dữ liệu thô từ object formData bằng phương thức .get() (ví dụ: formData.get('customerId'))"
+ - Ôn lại update:
+     Button truyền vào id -> ném id lên url
+     Page lấy id từ url -> lấy data by id -> truyền data vào form edit
+     submit vào action={updateInvoiceWithId} (sử dụng bind), chứ không truyền trực tiếp hàm như create"
+ - Đọc lại docs: Handle Error
+ - Đọc lại docs: Improving Accessibility
+ - Largest Contentful Paint (LCP): đánh giá hiệu suất tải trang
+ - First Input Delay (FID): phản ánh cảm nhận của người dùng về trải nghiệm khi tương tác với một trang web
+ - Cumulative Layout Shift (CLS): đo lường độ ổn định bố cục tổng thể của trang web
+
+
 
 
 
