@@ -4,7 +4,7 @@ type Props = {
   params: { slug: string };
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export default async function generateMetadata({ params }: Props): Promise<Metadata> {
     const postUrl = `https://my-app.com/posts/${params.slug}`;
 
     //url gọi api chụp ảnh
