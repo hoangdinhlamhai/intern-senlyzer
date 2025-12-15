@@ -16,17 +16,17 @@ export default function Home() {
 
       setLoading(true);
 
-      // Tạo slug an toàn
-      const slug = btoa(targetUrl).replace(/=/g, "");
+      const imageUrl =
+        `${window.location.origin}/api/og-screenshot?url=${encodeURIComponent(targetUrl)}`;
 
-      // LINK DÙNG ĐỂ SHARE (BOT CRAWL)
-      const postUrl = `${window.location.origin}/posts/${slug}`;
+      setPreviewUrl(`${imageUrl}&t=${Date.now()}`);
+      setShareLink(imageUrl);
+
 
       // API OG IMAGE
       const apiUrl = `/api/og-screenshot?url=${encodeURIComponent(targetUrl)}`;
 
       setPreviewUrl(`${apiUrl}&t=${Date.now()}`);
-      setShareLink(postUrl);
 
       setLoading(false);
   };
