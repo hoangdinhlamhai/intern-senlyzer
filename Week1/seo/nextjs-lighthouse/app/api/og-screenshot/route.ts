@@ -40,6 +40,8 @@ import puppeteer from 'puppeteer-core';
 // }
 import chromium from "@sparticuz/chromium";
 
+export const runtime = "nodejs";
+
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const url = searchParams.get("url");
