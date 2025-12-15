@@ -23,7 +23,7 @@ export default function Home() {
       const postUrl = `${window.location.origin}/posts/${slug}`;
 
       // API OG IMAGE
-      const apiUrl = `/api/og-screenshot?url=${encodeURIComponent(postUrl)}`;
+      const apiUrl = `/api/og-screenshot?url=${encodeURIComponent(targetUrl)}`;
 
       setPreviewUrl(`${apiUrl}&t=${Date.now()}`);
       setShareLink(postUrl);
