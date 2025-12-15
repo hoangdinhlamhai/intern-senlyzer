@@ -8,25 +8,29 @@ export default function Home() {
   // State lưu đường dẫn ảnh kết quả để hiển thị
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [shareLink, setShareLink] = useState<string | null>(null);
 
   const handleGenerate = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!targetUrl) return;
+      e.preventDefault();
+      if (!targetUrl) return;
 
-    setLoading(true);
-    
-    // Tạo URL gọi đến API của chính mình
-    // Lưu ý: Đây là cách Facebook/Zalo sẽ gọi API của bạn
-    const apiUrl = `/api/og-screenshot?url=${encodeURIComponent(targetUrl)}`;
-    
-    // Cập nhật state để thẻ <img> tải ảnh
-    // Thêm Date.now() để tránh browser cache ảnh cũ khi test liên tục
-    setPreviewUrl(`${apiUrl}&t=${Date.now()}`);
-    
-    // Giả lập loading (vì thẻ img sẽ tự load, ta chỉ cần show UI)
-    // Trong thực tế có thể dùng sự kiện onLoad của thẻ img để tắt loading chính xác hơn
-    setTimeout(() => setLoading(false), 2000);
+      setLoading(true);
+
+      // Tạo slug an toàn
+      const slug = btoa(targetUrl).replace(/=/g, "");
+
+      // LINK DÙNG ĐỂ SHARE (BOT CRAWL)
+      const postUrl = `${window.location.origin}/posts/${slug}`;
+
+      // API OG IMAGE
+      const apiUrl = `/api/og-screenshot?url=${encodeURIComponent(postUrl)}`;
+
+      setPreviewUrl(`${apiUrl}&t=${Date.now()}`);
+      setShareLink(postUrl);
+
+      setLoading(false);
   };
+
 
   return (
     <div style={{ padding: 40, fontFamily: 'sans-serif', maxWidth: 800, margin: '0 auto' }}>
@@ -79,6 +83,17 @@ export default function Home() {
           <code style={{ display: 'block', wordBreak: 'break-all', marginTop: 5 }}>
             {window.location.origin}{previewUrl.split('&t=')}
           </code>
+        </div>
+      )}
+
+      {shareLink && (
+        <div style={{ marginTop: 20 }}>
+          <strong>Link dùng để share:</strong>
+          <input
+            value={shareLink}
+            readOnly
+            style={{ width: "100%", padding: 10 }}
+          />
         </div>
       )}
     </div>

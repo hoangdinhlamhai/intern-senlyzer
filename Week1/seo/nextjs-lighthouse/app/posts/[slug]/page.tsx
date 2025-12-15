@@ -8,19 +8,31 @@ type Props = {
 export async function generateMetadata(
   { params }: Props
 ): Promise<Metadata> {
-  const postUrl = `https://my-app.com/posts/${params.slug}`;
 
-  const ogImageUrl = `https://my-app.com/api/og-screenshot?url=${encodeURIComponent(
-    postUrl
-  )}`;
+  // 🔑 Decode slug -> URL gốc
+  const originalUrl = Buffer
+    .from(params.slug, "base64")
+    .toString("utf-8");
+
+  const ogImageUrl =
+    `https://intern-senlyzer-screenshoots.vercel.app/api/og-screenshot?url=${encodeURIComponent(
+      originalUrl
+    )}`;
 
   return {
-    title: `Bài viết ${params.slug}`,
+    title: `Preview ${originalUrl}`,
     openGraph: {
-      images: [ogImageUrl],
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
   };
 }
+
 
 // page:default export
 export default function Page({ params }: Props) {
