@@ -11,26 +11,23 @@ export default function Home() {
   const [shareLink, setShareLink] = useState<string | null>(null);
 
   const handleGenerate = (e: React.FormEvent) => {
-      e.preventDefault();
-      if (!targetUrl) return;
+    e.preventDefault();
+    if (!targetUrl) return;
 
-      setLoading(true);
+    setLoading(true);
 
-      const imageUrl =
-        `${window.location.origin}/api/og-screenshot?url=${encodeURIComponent(targetUrl)}`;
+    // nếu không có http/https thì tự thêm https://
+    const normalizedUrl = targetUrl.startsWith("http://") || targetUrl.startsWith("https://")
+      ? targetUrl
+      : `https://${targetUrl}`;
 
-      setPreviewUrl(`${imageUrl}&t=${Date.now()}`);
-      setShareLink(imageUrl);
+    const apiUrl = `/api/og-screenshot?url=${encodeURIComponent(normalizedUrl)}`;
 
+    setPreviewUrl(`${apiUrl}&t=${Date.now()}`);
+    setShareLink(`${window.location.origin}${apiUrl}`);
 
-      // API OG IMAGE
-      const apiUrl = `/api/og-screenshot?url=${encodeURIComponent(targetUrl)}`;
-
-      setPreviewUrl(`${apiUrl}&t=${Date.now()}`);
-
-      setLoading(false);
+    setLoading(false);
   };
-
 
   return (
     <div style={{ padding: 40, fontFamily: 'sans-serif', maxWidth: 800, margin: '0 auto' }}>
@@ -39,7 +36,7 @@ export default function Home() {
 
       <form onSubmit={handleGenerate} style={{ display: 'flex', gap: 10, marginBottom: 20 }}>
         <input
-          type="url"
+          type="text"
           placeholder="Nhập URL (ví dụ: https://google.com)"
           value={targetUrl}
           onChange={(e) => setTargetUrl(e.target.value)}
