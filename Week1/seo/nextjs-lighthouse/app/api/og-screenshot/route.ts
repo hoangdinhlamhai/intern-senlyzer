@@ -23,7 +23,15 @@ async function getBrowser() {
 
   if (process.env.VERCEL) {
     return puppeteer.launch({
-      args: chromium.args, // ✅ KHÔNG thêm flag
+      // args: chromium.args, //KHÔNG thêm flag
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-gpu',
+        // '--single-process',
+        '--no-zygote'
+      ],
       executablePath: await chromium.executablePath(),
       headless: true,
     });
