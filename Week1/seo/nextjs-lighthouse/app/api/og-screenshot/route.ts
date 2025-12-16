@@ -1,48 +1,3 @@
-// import { NextResponse } from 'next/server';
-// import puppeteer from 'puppeteer';
-
-// export async function GET(request: Request) {
-//     // lấy URL từ tham số truy vấn
-//     const { searchParams } = new URL(request.url);
-//     const url = searchParams.get("url");
-
-//     if (!url) {
-//         return NextResponse.json(
-//         { message: "Missing url" },
-//         { status: 400 }
-//         );
-//     }
-
-//     const browser = await puppeteer.launch({
-//       headless: true,
-//       args: ['--no-sandbox', '--disable-setuid-sandbox'],
-//     });
-
-//     const page = await browser.newPage();
-//     await page.setViewport({ width: 1200, height: 630 });
-//     await page.goto(url, { waitUntil: "networkidle2", timeout: 10000 });
-
-//     const screenshotBuffer = await page.screenshot({ 
-//         type: 'png', 
-//         encoding: 'binary', // Trả về binary data
-//         fullPage: false 
-//     });
-
-//     await browser.close();
-
-//     return new NextResponse(Buffer.from(screenshotBuffer), {
-//             headers: {
-//                 "Content-Type": "image/png",
-//                 // Cache 1 ngày để tối ưu như Image.Social [1]
-//                 "Cache-Control": "public, max-age=86400, immutable", 
-//             },
-//         });
-// }
-
-// file app/api/og-screenshot/routes.ts (Sửa đổi)
-
-// file app/api/og-screenshot/routes.ts (Phiên bản hoạt động ở cả Local và Vercel)
-
 import { NextResponse } from "next/server";
 import chromium from "@sparticuz/chromium";
 
@@ -92,12 +47,32 @@ export async function GET(request: Request) {
     browser = await getBrowser();
 
     const page = await browser.newPage();
+
+    await page.setUserAgent(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+      "AppleWebKit/537.36 (KHTML, like Gecko) " +
+      "Chrome/120.0.0.0 Safari/537.36"
+    );
+
+    await page.setExtraHTTPHeaders({
+      "accept-language": "en-US,en;q=0.9",
+    });
+
+    await page.evaluateOnNewDocument(() => {
+      Object.defineProperty(navigator, 'webdriver', {
+        get: () => false,
+      });
+    });
+
     await page.setViewport({ width: 1200, height: 630 });
 
     await page.goto(url, {
       waitUntil: "domcontentloaded", // QUAN TRỌNG cho Vercel
       timeout: 15000,
     });
+
+    // await page.waitForSelector("img", { timeout: 5000 });
+    await new Promise((resolve) => setTimeout(resolve, 5000));
 
     const screenshot = await page.screenshot({
       type: "png",

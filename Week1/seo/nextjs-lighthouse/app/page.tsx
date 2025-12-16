@@ -25,8 +25,6 @@ export default function Home() {
 
     setPreviewUrl(`${apiUrl}&t=${Date.now()}`);
     setShareLink(`${window.location.origin}${apiUrl}`);
-
-    setLoading(false);
   };
 
   return (
