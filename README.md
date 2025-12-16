@@ -143,6 +143,23 @@ thay vì một URL string. -> Khi người dùng nhấn Submit, trình duyệt s
 Day 7: 
  - Clone web https://image.social/
 
+Week 2: 
+Day 1:
+  - Introducing Lighthouse
+     + Mở DevTools và nhấp vào tab Lighthouse
+  - Automatic Image Optimization
+     + Sử dụng Image từ next/image thay vì thẻ img
+  - Dynamic Imports.
+  - Dynamic Imports for Components.
+  - Optimizing Fonts.
+  - Optimizing Third-Party Scripts
+    + Dùng import Script from 'next/script'; có thể thêm các thành phần bên thứ 3 vào bất kì đâu
+  - Monitoring your Core Web Vitals.
+  - Next.js Speed Insights
+  - Optimize app tạo ảnh
+
+
+
 
 
 
