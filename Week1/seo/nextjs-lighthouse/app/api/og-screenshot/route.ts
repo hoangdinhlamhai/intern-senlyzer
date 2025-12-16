@@ -33,6 +33,29 @@ async function getBrowser() {
   });
 }
 
+//hàm lấy trang chủ từ url
+function getHomepage(url: string) {
+  try {
+    const u = new URL(url);
+    return `${u.protocol}//${u.hostname}`;
+  } catch {
+    return null;
+  }
+}
+
+//hàm chụp ảnh:
+async function capture(page: any, url: string) {
+  await page.goto(url, {
+    waitUntil: "domcontentloaded",
+    timeout: 12000, // ⬅️ giảm để còn thời gian fallback
+  });
+
+  await new Promise((r) => setTimeout(r, 3000));
+
+  return await page.screenshot({ type: "png" });
+}
+
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const url = searchParams.get("url");
@@ -74,11 +97,22 @@ export async function GET(request: Request) {
     // await page.waitForSelector("img", { timeout: 5000 });
     await new Promise((resolve) => setTimeout(resolve, 5000));
 
-    const screenshot = await page.screenshot({
-      type: "png",
-    });
+    let screenshot: Buffer;
 
-    return new NextResponse(screenshot, {
+    try {
+      // thử chụp URL gốc
+      screenshot = await capture(page, url);
+    } catch (err) {
+      console.warn("PRIMARY URL FAILED, FALLBACK TO HOMEPAGE");
+
+      const homepage = getHomepage(url);
+      if (!homepage) throw err;
+
+      // fallback chụp trang chủ
+      screenshot = await capture(page, homepage);
+    }
+
+    return new NextResponse(new Uint8Array(screenshot), {
       headers: {
         "Content-Type": "image/png",
         "Cache-Control": "public, max-age=86400, immutable",

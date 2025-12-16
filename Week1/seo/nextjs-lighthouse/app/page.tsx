@@ -72,14 +72,14 @@ export default function Home() {
         )}
       </div>
       
-      {previewUrl && (
+      {/* {previewUrl && (
         <div style={{ marginTop: 20, background: '#eee', padding: 10, borderRadius: 5 }}>
           <strong>Link API cho Bot (Copy bỏ vào thẻ meta):</strong>
           <code style={{ display: 'block', wordBreak: 'break-all', marginTop: 5 }}>
             {window.location.origin}{previewUrl.split('&t=')}
           </code>
         </div>
-      )}
+      )} */}
 
       {shareLink && (
         <div style={{ marginTop: 20 }}>
