@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import chromium from "@sparticuz/chromium";
+import { get } from "http";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
@@ -47,7 +48,7 @@ function getHomepage(url: string) {
 async function capture(page: any, url: string) {
   await page.goto(url, {
     waitUntil: "domcontentloaded",
-    timeout: 12000, // ⬅️ giảm để còn thời gian fallback
+    timeout: 12000, // giảm để còn thời gian fallback
   });
 
   await new Promise((r) => setTimeout(r, 3000));
@@ -88,11 +89,6 @@ export async function GET(request: Request) {
     });
 
     await page.setViewport({ width: 1200, height: 630 });
-
-    await page.goto(url, {
-      waitUntil: "domcontentloaded", // QUAN TRỌNG cho Vercel
-      timeout: 15000,
-    });
 
     // await page.waitForSelector("img", { timeout: 5000 });
     await new Promise((resolve) => setTimeout(resolve, 5000));

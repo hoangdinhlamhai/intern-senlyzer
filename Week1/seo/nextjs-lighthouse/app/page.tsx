@@ -83,7 +83,7 @@ export default function Home() {
 
       {shareLink && (
         <div style={{ marginTop: 20 }}>
-          <strong>Link dùng để share:</strong>
+          <strong>Link ảnh:</strong>
           <input
             value={shareLink}
             readOnly
