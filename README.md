@@ -140,6 +140,9 @@ thay vì một URL string. -> Khi người dùng nhấn Submit, trình duyệt s
  - First Input Delay (FID): phản ánh cảm nhận của người dùng về trải nghiệm khi tương tác với một trang web
  - Cumulative Layout Shift (CLS): đo lường độ ổn định bố cục tổng thể của trang web
 
+Day 7: 
+ - Clone web https://image.social/
+
 
 
 
