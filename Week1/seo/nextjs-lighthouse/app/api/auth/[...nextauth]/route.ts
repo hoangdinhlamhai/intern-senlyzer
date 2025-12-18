@@ -5,11 +5,11 @@ import { prisma } from "@/app/lib/prisma";
 export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
-      clientId: "817300711876-tf9sqsie177tu738idfnufcf406q657v.apps.googleusercontent.com",
-      clientSecret: "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",
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
-  secret: "ba1dfb9bdce2efae72ede0c79188c214",
+  secret: process.env.NEXTAUTH_SECRET,
 
   callbacks: {
     // khi user login thành công
