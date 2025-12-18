@@ -30,7 +30,7 @@ export const authOptions: AuthOptions = {
               email: user.email,
               name: user.name || "",
               quota: 10,
-              password: "", // nếu login Google
+              password: "1",
             },
           });
         }
