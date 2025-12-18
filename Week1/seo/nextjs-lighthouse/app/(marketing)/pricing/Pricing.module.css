@@ -1,0 +1,149 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.heading {
+  font-size: 36px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.subheading {
+  font-size: 18px;
+  color: #475569;
+  margin-bottom: 24px;
+}
+
+.toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.save {
+  color: #dd2476;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.toggleBtn {
+  background: #f1f5f9;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.toggleBtn:hover {
+  background: #e2e8f0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 32px 24px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+.plan {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.desc {
+  font-size: 14px;
+  color: #475569;
+  margin-bottom: 16px;
+}
+
+.price {
+  font-size: 18px;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.discount {
+  font-size: 14px;
+  color: #dd2476;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: #475569;
+}
+
+.cta {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff512f, #dd2476);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(221,36,118,0.5);
+}
+
+/* Pro badge */
+.popular {
+  border: 2px solid #dd2476;
+}
+
+.badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #dd2476;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
