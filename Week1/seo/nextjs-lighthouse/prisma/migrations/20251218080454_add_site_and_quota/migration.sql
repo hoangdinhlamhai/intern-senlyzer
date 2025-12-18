@@ -1,0 +1,16 @@
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "quota" INTEGER NOT NULL DEFAULT 10;
+
+-- CreateTable
+CREATE TABLE "Site" (
+    "id" SERIAL NOT NULL,
+    "url" TEXT NOT NULL,
+    "image" TEXT NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Site_pkey" PRIMARY KEY ("id")
+);
+
+-- AddForeignKey
+ALTER TABLE "Site" ADD CONSTRAINT "Site_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

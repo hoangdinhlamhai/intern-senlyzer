@@ -19,7 +19,20 @@ model User {
   email     String   @unique
   password  String
   name      String?
+  quota     Int      @default(10)
+  createdAt DateTime @default(now())
+
+  sites     Site[]
+}
+
+model Site {
+  id        Int      @id @default(autoincrement())
+  url       String
+  image     String
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 }
+
 
 

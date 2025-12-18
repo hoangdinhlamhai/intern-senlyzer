@@ -1,9 +1,16 @@
+"use client";
 import Link from "next/link";
 import styles from "./Sidebar.module.css";
-import { Home, CreditCard, HelpCircle, ChevronDown } from "lucide-react";
+import { Home, CreditCard, HelpCircle } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 
 export default function Sidebar() {
+    const { data: session } = useSession();
+
+    const name = session?.user?.name ?? "User";
+    const email = session?.user?.email ?? "";
+
     return (
         <aside className={styles.sidebar}>
             {/* Logo */}
@@ -15,10 +22,12 @@ export default function Sidebar() {
 
             {/* User */}
             <div className={styles.user}>
-                <div className={styles.avatar}>H</div>
-                <span className={styles.username}>Hai</span>
-                <ChevronDown size={16} />
+                <div className={styles.userInfo}>
+                    <span style={{display: "inline-block"}} className={styles.username}>{name}</span>
+                    <span className={styles.email}>{email}</span>
+                </div>
             </div>
+
 
 
             {/* Menu */}

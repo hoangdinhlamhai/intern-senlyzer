@@ -1,8 +1,20 @@
+'use client';
+
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import styles from "./Home.module.css";
 import Link from "next/link";
 
 export default function Home() {
+  const { data: session } = useSession();
+
+  const handleDashboardClick = (e: React.MouseEvent) => {
+    if (!session) {
+      e.preventDefault();
+      alert("Bạn cần đăng nhập để truy cập Dashboard!");
+    }
+  };
+
   return (
     <>
       <section className={styles.hero}>
@@ -17,7 +29,7 @@ export default function Home() {
                 Automate social link previews for every page of your website with
                 just one line of code—boost your click-through rates now!
               </p>
-              <Link href="/signup" className={styles.cta}>
+              <Link href="/dashboard" onClick={handleDashboardClick} className={styles.cta}>
                   Try it now
               </Link>
             </div>
@@ -97,7 +109,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <Link href="/signup" className={styles.ctaGlow}>Get started now</Link>
+          <Link href="/dashboard" onClick={handleDashboardClick} className={styles.ctaGlow}>Get started now</Link>
         </div>
       </section>
 
@@ -122,12 +134,12 @@ export default function Home() {
           <div className={styles.plan}>
             <h3>Free</h3>
             <p>Perfect for personal projects</p>
-            <Link href="/signup" className={styles.cta}>Get Started</Link>
+            <Link href="/dashboard" onClick={handleDashboardClick} className={styles.cta}>Get Started</Link>
           </div>
           <div className={styles.plan}>
             <h3>Pro</h3>
             <p>For growing businesses</p>
-            <Link href="/signup" className={styles.cta}>Upgrade</Link>
+            <Link href="/dashboard" onClick={handleDashboardClick} className={styles.cta}>Upgrade</Link>
           </div>
         </div>
       </section>
