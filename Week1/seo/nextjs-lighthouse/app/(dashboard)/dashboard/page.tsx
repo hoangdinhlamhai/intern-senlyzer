@@ -5,7 +5,7 @@ import styles from "./Dashboard.module.css";
 
 export default function Dashboard() {
   const [sites, setSites] = useState<{ id: number; url: string; image: string }[]>([]);
-  const [quota, setQuota] = useState(5); // số lần tạo site còn lại (fake)
+  const [quota, setQuota] = useState(0); // số lần tạo site còn lại (fake)
   const [showPopup, setShowPopup] = useState(false);
 
   // logic tạo preview
@@ -32,16 +32,23 @@ export default function Dashboard() {
         : `https://${targetUrl}`;
 
     const apiUrl = `/api/og-screenshot?url=${encodeURIComponent(normalizedUrl)}`;
-    const preview = `${apiUrl}&t=${Date.now()}`;
-    setPreviewUrl(preview);
-    setShareLink(`${window.location.origin}${apiUrl}`);
+    // const preview = `${apiUrl}&t=${Date.now()}`;
+    const res = await fetch(apiUrl, { redirect: "follow" });
+
+    // lấy URL cloudinary thật
+    const cloudinaryUrl = res.url;
+    // const preview = apiUrl;
+    // setPreviewUrl(preview);
+    // setShareLink(`${window.location.origin}${apiUrl}`);
+    setPreviewUrl(cloudinaryUrl);
+    setShareLink(cloudinaryUrl);
 
     await fetch("/api/sites", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         url: normalizedUrl,
-        image: preview,
+        image: cloudinaryUrl,
       }),
     });
 
@@ -51,7 +58,7 @@ export default function Dashboard() {
   
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Are you sure you want to delete this site?")) return;
+    // if (!confirm("Are you sure you want to delete this site?")) return;
 
     await fetch(`/api/sites?id=${id}`, { method: "DELETE" });
     fetchSites();
@@ -87,8 +94,15 @@ export default function Dashboard() {
         {sites.map((site, idx) => (
           <div key={idx} className={styles.siteItem}>
             <div className={styles.siteInfo}>
-              <strong>{site.url}</strong>
-              <p>{`${window.location.origin}${site.image}`}</p>
+              <strong style={{display: "block"}}>{site.url}</strong>
+              <a
+                href={site.image}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.previewLink}
+              >
+                Click here to get Image
+              </a>
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={site.image} alt="preview" className={styles.previewImg} />
@@ -135,7 +149,16 @@ export default function Dashboard() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={previewUrl} alt="Preview" 
                   onLoad={() => setLoading(false)}/>
-                <p>Link: {shareLink}</p>
+                  {shareLink && (
+                    <a
+                      href={shareLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.previewLink}
+                    >
+                      Click here to get Image
+                    </a>
+                  )}
               </div>
             )}
 

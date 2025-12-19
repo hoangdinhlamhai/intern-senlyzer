@@ -1,9 +1,14 @@
 import { NextResponse } from "next/server";
 import chromium from "@sparticuz/chromium";
-import { get } from "http";
+import crypto from "crypto";
+import cloudinary from "@/app/lib/cloudinary";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
+
+function hashUrl(url: string) {
+  return crypto.createHash("md5").update(url).digest("hex");
+}
 
 async function getPuppeteer() {
   if (process.env.VERCEL) {
@@ -73,6 +78,18 @@ export async function GET(request: Request) {
     return NextResponse.json({ message: "Missing url" }, { status: 400 });
   }
 
+  //check cache
+  const hash = hashUrl(url);
+  const publicId = hash;
+  const cloudinaryPublicId = `previews/${hash}`;
+
+  try {
+    const existing = await cloudinary.api.resource(cloudinaryPublicId, { resource_type: "image", type: "upload" });
+    return NextResponse.redirect(existing.secure_url);
+  } catch {
+    // chưa có → generate tiếp
+  }
+
   let browser: any;
 
   try {
@@ -116,12 +133,29 @@ export async function GET(request: Request) {
       screenshot = await capture(page, homepage);
     }
 
-    return new NextResponse(new Uint8Array(screenshot), {
-      headers: {
-        "Content-Type": "image/png",
-        "Cache-Control": "public, max-age=86400, immutable",
-      },
+    const uploadResult = await new Promise<any>((resolve, reject) => {
+      cloudinary.uploader.upload_stream(
+        {
+          public_id: publicId,
+          folder: "previews",
+          overwrite: false,
+          resource_type: "image",
+        },
+        (err, result) => {
+          if (err) reject(err);
+          else resolve(result);
+        }
+      ).end(screenshot);
     });
+
+    // return new NextResponse(new Uint8Array(screenshot), {
+    //   headers: {
+    //     "Content-Type": "image/png",
+    //     "Cache-Control": "public, max-age=86400, immutable",
+    //   },
+    // });
+
+    return NextResponse.redirect(uploadResult.secure_url);
   } catch (error) {
     console.error("SCREENSHOT ERROR:", error);
     return NextResponse.json(

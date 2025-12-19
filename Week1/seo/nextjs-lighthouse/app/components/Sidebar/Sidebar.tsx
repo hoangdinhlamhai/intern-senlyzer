@@ -16,7 +16,7 @@ export default function Sidebar() {
             {/* Logo */}
             <div className={styles.logo}>
                 <span className={styles.logoBlack}>image</span>
-                <span className={styles.logoRed}>.Senlyzer</span>
+                <Link href="/" className={styles.logoRed}>.Senlyzer</Link>
             </div>
 
 
