@@ -23,6 +23,7 @@ model User {
   createdAt DateTime @default(now())
 
   sites     Site[]
+  payments  Payment[]
 }
 
 model Site {
@@ -32,6 +33,18 @@ model Site {
   userId    Int
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
+}
+
+model Payment {
+  id            Int      @id @default(autoincrement())
+  orderId       String   @unique
+  amount        Int
+  quotaAdded    Int
+  status        String @default("PENDING")
+  userId        Int
+  user          User     @relation(fields: [userId], references: [id])
+  createdAt     DateTime @default(now())
+  paidAt        DateTime?
 }
 
 
